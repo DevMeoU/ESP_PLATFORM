@@ -1,0 +1,141 @@
+/*
+ * app_button_CY8CMBR3xxx.h
+ *
+ *  Created on: Jul 21, 2021
+ *      Author: laian
+ */
+
+#ifndef __APP_BUTTON_CY8CMBR3XXX_H
+#define __APP_BUTTON_CY8CMBR3XXX_H
+
+#include "sdkconfig.h"
+#include "config.h"
+#include <stdio.h>
+#include "esp_log.h"
+#include "driver/i2c.h"
+#include "I2C.h"
+
+bool app_cy8cmbr3xxx_init();
+bool app_cy8cmbr3xxx_config();
+
+bool app_cy8cmbr3xxx_write(const uint8_t *pData, int size);
+bool app_cy8cmbr3xxx_read(uint8_t *pData, int size);
+
+#define MBR_ADDRESS                   0x37
+
+/* CY8CMBR3116 Register Map Offset Address */
+#define MBR_REG_REGMAP_ORIGIN			0x00
+#define MBR_REG_SENSOR_PATTERN			0x00
+#define MBR_REG_FSS_EN					0x02
+#define MBR_REG_TOGGLE_EN				0x04
+#define MBR_REG_LED_ON_EN				0x06
+#define MBR_REG_SENSITIVITY0			0x08
+#define MBR_REG_SENSITIVITY1			0x09
+#define MBR_REG_SENSITIVITY2			0x0A
+#define MBR_REG_SENSITIVITY3			0x0B
+#define MBR_REG_BASE_THRESHOLD0			0x0C
+#define MBR_REG_BASE_THRESHOLD1			0x0D
+#define MBR_REG_FINGER_THRESHOLD2		0x0E
+#define MBR_REG_FINGER_THRESHOLD3		0x0F
+#define MBR_REG_FINGER_THRESHOLD4		0x10
+#define MBR_REG_FINGER_THRESHOLD5		0x11
+#define MBR_REG_FINGER_THRESHOLD6		0x12
+#define MBR_REG_FINGER_THRESHOLD7		0x13
+#define MBR_REG_FINGER_THRESHOLD8		0x14
+#define MBR_REG_FINGER_THRESHOLD9		0x15
+#define MBR_REG_FINGER_THRESHOLD10		0x16
+#define MBR_REG_FINGER_THRESHOLD11		0x17
+#define MBR_REG_FINGER_THRESHOLD12		0x18
+#define MBR_REG_FINGER_THRESHOLD13		0x19
+#define MBR_REG_FINGER_THRESHOLD14		0x1A
+#define MBR_REG_FINGER_THRESHOLD15		0x1B
+#define MBR_REG_SENSOR_DEBOUNCE			0x1C
+#define MBR_REG_BUTTON_HYS				0x1D
+#define MBR_REG_BUTTON_BUT				0x1E
+#define MBR_REG_BUTTON_LBR				0x1F
+#define MBR_REG_BUTTON_NNT				0x20
+#define MBR_REG_BUTTON_NT				0x21
+#define MBR_REG_PROX_EN					0x26
+#define MBR_REG_PROX_CFG				0x27
+#define MBR_REG_PROX_CFG2				0x28
+#define MBR_REG_PROX_TOUCH_TH0			0x2A
+#define MBR_REG_PROX_TOUCH_TH1			0x2C
+#define MBR_REG_PROX_HYS				0x30
+#define MBR_REG_PROX_BUT				0x31
+#define MBR_REG_PROX_LBR				0x32
+#define MBR_REG_PROX_NNT				0x33
+#define MBR_REG_PROX_NT					0x34
+#define MBR_REG_PROX_POSITIVE_TH0		0x35
+#define MBR_REG_PROX_POSITIVE_TH1		0x36
+#define MBR_REG_PROX_NEGATIVE_TH0		0x39
+#define MBR_REG_PROX_NEGATIVE_TH1		0x3A
+#define MBR_REG_LED_ON_TIME				0x3D
+#define MBR_REG_BUZZER_CFG				0x3E
+#define MBR_REG_BUZZER_ON_TIME			0x3F
+#define MBR_REG_GPO_CFG					0x40
+#define MBR_REG_PWM_DUTYCYCLE_CFG0		0x41
+#define MBR_REG_PWM_DUTYCYCLE_CFG1		0x42
+#define MBR_REG_PWM_DUTYCYCLE_CFG2		0x43
+#define MBR_REG_PWM_DUTYCYCLE_CFG3		0x44
+#define MBR_REG_PWM_DUTYCYCLE_CFG4		0x45
+#define MBR_REG_PWM_DUTYCYCLE_CFG5		0x46
+#define MBR_REG_PWM_DUTYCYCLE_CFG6		0x47
+#define MBR_REG_PWM_DUTYCYCLE_CFG7		0x48
+#define MBR_REG_SPO_CFG					0x4C
+#define MBR_REG_DEVICE_CFG0				0x4D
+#define MBR_REG_DEVICE_CFG1				0x4E
+#define MBR_REG_DEVICE_CFG2				0x4F
+#define MBR_REG_I2C_ADDR				0x51
+#define MBR_REG_REFRESH_CTRL			0x52
+#define MBR_REG_STATE_TIMEOUT			0x55
+#define MBR_REG_SLIDER_CFG				0x5D
+#define MBR_REG_SLIDER1_CFG				0x61
+#define MBR_REG_SLIDER1_RESOLUTION		0x62
+#define MBR_REG_SLIDER1_THRESHOLD		0x63
+#define MBR_REG_SLIDER2_CFG				0x67
+#define MBR_REG_SLIDER2_RESOLUTION		0x68
+#define MBR_REG_SLIDER2_THRESHOLD		0x69
+#define MBR_REG_SLIDER_DEBOUNCE			0x6F
+#define MBR_REG_SLIDER_BUT				0x70
+#define MBR_REG_SLIDER_LBR				0x71
+#define MBR_REG_SLIDER_NNT				0x72
+#define MBR_REG_SLIDER_NT				0x73
+#define MBR_REG_CONFIG_CRC				0x7E
+#define MBR_REG_GPO_OUTPUT_STATE		0x80
+#define MBR_REG_SENSOR_ID				0x82
+#define MBR_REG_CTRL_CMD				0x86
+#define MBR_REG_CTRL_CMD_STATUS			0x88
+#define MBR_REG_CTRL_CMD_ERROR			0x89
+#define MBR_REG_SYSTEM_STATUS			0x8A
+#define MBR_REG_PREV_CTRL_CMD_CODE		0x8C
+#define MBR_REG_FAMILY_ID				0x8F
+#define MBR_REG_DEVICE_ID				0x90
+#define MBR_REG_DEVICE_REV				0x92
+
+#define MBR_REG_BUTTON_STATUS			0xAA
+#define MBR_REG_PROX_STAT               0xAE
+
+/* Command Codes */
+#define MBR_CMD_NULL					0x00
+#define MBR_CMD_SAVE_CHECK_CRC          0x02
+#define MBR_CMD_CALC_CRC                0x03
+#define MBR_CMD_LOAD_FACTORY            0x04
+#define MBR_CMD_LOAD_PRIMARY            0x05
+#define MBR_CMD_LOAD_SECONDARY          0x06
+#define MBR_CMD_SLEEP                   0x07
+#define MBR_CMD_CLEAR_LATCHED_STATUS    0x08
+#define MBR_CMD_CMD_RESET_PROX0_FILTER	0x09
+#define MBR_CMD_CMD_RESET_PROX1_FILTER	0x0A
+#define MBR_CMD_ENTER_CONFIG_MODE       0x0B
+#define MBR_CMD_EXIT_CONTROL_RUN        0xFE
+#define MBR_CMD_SW_RESET                0xFF
+
+#define MBR_FAMILY_ID					154
+
+#define MBR3102_DEVICE_ID				2561
+#define MBR3106S_DEVICE_ID				2566
+#define MBR3108_DEVICE_ID				2563
+#define MBR3110_DEVICE_ID				2562
+#define MBR3116_DEVICE_ID				2565
+
+#endif /* __APP_BUTTON_CY8CMBR3XXX_H */
